@@ -12,8 +12,8 @@ export default function General(){
           {data.current ? (
             <>
               <h4 className="text-lg">{data.current.title}</h4>
-              <p className="text-sm">{data.current.details}</p>
-              <p className="text-xs text-gray-500">Start: {data.current.startTime}</p>
+              <p className="text-sm">{data.current.eventDetails}</p>
+              <p className="text-xs text-gray-500">Token No: {data.current.mobileNo}</p>
             </>
           ) : <p>No current event</p>}
         </div>
@@ -22,8 +22,8 @@ export default function General(){
           {data.next ? (
             <>
               <h4 className="text-lg">{data.next.title}</h4>
-              <p className="text-sm">{data.next.details}</p>
-              <p className="text-xs text-gray-500">Start: {data.next.startTime}</p>
+              <p className="text-sm">{data.next.eventDetails}</p>
+              <p className="text-xs text-gray-500">Token No: {data.next.mobileNo}</p>
             </>
           ) : <p>No next event</p>}
         </div>
