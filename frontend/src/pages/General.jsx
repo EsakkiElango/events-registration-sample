@@ -6,13 +6,13 @@ export default function General(){
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-4">General — Events Overview</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
         <div className="bg-white p-4 rounded shadow">
           <h3 className="font-semibold">Current Event</h3>
           {data.current ? (
             <>
-              <h4 className="text-lg">{data.current.title}</h4>
-              <p className="text-sm">{data.current.eventDetails}</p>
+              <h4 className="text-lg">Church Name: {data.current.title}</h4>
+              <p className="text-sm">Event: {data.current.eventDetails}</p>
               <p className="text-xs text-gray-500">Token No: {data.current.mobileNo}</p>
             </>
           ) : <p>No current event</p>}
@@ -21,8 +21,8 @@ export default function General(){
           <h3 className="font-semibold">Next Event</h3>
           {data.next ? (
             <>
-              <h4 className="text-lg">{data.next.title}</h4>
-              <p className="text-sm">{data.next.eventDetails}</p>
+              <h4 className="text-lg">Church Name: {data.next.title}</h4>
+              <p className="text-sm">Event: {data.next.eventDetails}</p>
               <p className="text-xs text-gray-500">Token No: {data.next.mobileNo}</p>
             </>
           ) : <p>No next event</p>}
