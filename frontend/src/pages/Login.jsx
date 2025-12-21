@@ -3,8 +3,8 @@ import API from '../api';
 import { saveAuth } from '../auth';
 import { useNavigate } from 'react-router-dom';
 export default function Login(){
-  const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('adminpass');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [err, setErr] = useState(null);
   const nav = useNavigate();
   const submit = async (e) => {
@@ -26,7 +26,7 @@ export default function Login(){
           <div><label className="block text-sm">Password<input type="password" value={password} onChange={e=>setPassword(e.target.value)} className="w-full border p-2 rounded" /></label></div>
           <div className="flex items-center justify-between">
             <button className="bg-blue-600 text-white px-4 py-2 rounded">Login</button>
-            <div className="text-xs text-gray-500">Try admin/adminpass or user/userpass</div>
+            {/* <div className="text-xs text-gray-500">Try admin/adminpass or user/userpass</div> */}
           </div>
           {err && <div className="text-red-600">{err}</div>}
         </form>

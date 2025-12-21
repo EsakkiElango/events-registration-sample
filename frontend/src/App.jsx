@@ -7,10 +7,33 @@ import RegistrationForm from './pages/RegistrationForm';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 export default function App(){
+
+const [bgUrl, setBgUrl] = React.useState('');
+  const googleImageUrl = "https://drive.google.com/drive-viewer/AKGpihahl_S4fZOGl_iTFNk4Cach8rolf1imBXtQey2cHiI67NosFhN4GY-ePdFZB__XLV21BkD6I9Lp6cMl6mhnmiW_mrmY9hqx5Q=w1920-h1080-rw-v1?auditContext=forDisplay";
+
+  React.useEffect(() => {
+    // Fetch the image to bypass NotSameSite/CORP issues
+    fetch(googleImageUrl, {
+      referrerPolicy: "no-referrer" // Key part to avoid Google's block
+    })
+      .then((res) => res.blob())
+      .then((blob) => {
+        // Create a local URL for the blob
+        const objectURL = URL.createObjectURL(blob);
+        setBgUrl(objectURL);
+      })
+      .catch((err) => console.error("Failed to load background:", err));
+
+    // Cleanup memory when component unmounts
+    return () => {
+      if (bgUrl) URL.revokeObjectURL(bgUrl);
+    };
+  }, []);
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen" style={{ backgroundImage: bgUrl ? `url(${bgUrl})` : 'none',
+    backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundAttachment: 'fixed' }}>
       <Navbar />
-      <div className="max-w-5xl mx-auto p-4">
+      <div className="max-w-7xl mx-auto p-4" >
         <Routes>
           <Route path="/login" element={<Login/>} />
           <Route path="/" element={<ProtectedRoute><General/></ProtectedRoute>} />

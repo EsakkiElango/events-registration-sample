@@ -32,7 +32,7 @@ export default function RegisterList(){
                   {(prov)=>(
                     <div ref={prov.innerRef} {...prov.draggableProps} {...prov.dragHandleProps} className="bg-white p-3 rounded shadow flex justify-between">
                       <div>
-                        <h4 className="font-semibold">{it.title} {it.status==='current' && '(current)'}</h4>
+                        <h4 className="font-semibold">{it.title} / {it.eventDetails} {it.status==='current' && '(current)'}</h4>
                         <p className="text-sm">{it.details}</p>
                         <small className="text-xs text-gray-500">Order: {it.orderIndex}</small>
                       </div>

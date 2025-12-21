@@ -35,8 +35,8 @@ app.use(bodyParser.json());
 
 // static users
 const USERS = {
-  admin: { password: 'adminpass', role: 'admin' },
-  user: { password: 'userpass', role: 'user' }
+  admin: { password: 'Cho@csi.', role: 'admin' },
+  user: { password: 'dman98', role: 'user' }
 };
 
 app.post('/api/login', (req,res)=>{
@@ -121,7 +121,7 @@ app.post('/api/events/:id/complete', auth, async (req,res)=>{
 
 app.get('/api/events/current-next', async (req,res)=>{
   const current = await getAsync("SELECT * FROM events WHERE status='current' LIMIT 1");
-  const next = await getAsync("SELECT * FROM events WHERE status='upcoming' ORDER BY orderIndex ASC LIMIT 1");
+  const next = await allAsync("SELECT * FROM events WHERE status='upcoming' ORDER BY orderIndex ASC LIMIT 3");
   res.json({ current, next });
 });
 
