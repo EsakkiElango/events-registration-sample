@@ -5,7 +5,11 @@ import { saveAs } from 'file-saver';
 import API from '../api';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Link } from 'react-router-dom';
+import { getAuth } from '../auth';
+
 export default function RegisterList(){
+  const auth = getAuth();
+  console.log('AU',auth)
   const [items, setItems] = useState([]);
   useEffect(()=>{ load(); },[]);
   const load = ()=> API('/api/events').then(setItems).catch(console.error);
@@ -69,7 +73,7 @@ export default function RegisterList(){
                       </div>
                       <div className="space-x-2">
                         <Link to={`/registers/${it.id}/edit`} className="text-sm underline">Edit</Link>
-                        <button onClick={()=>remove(it.id)} className="text-sm text-red-600">Delete</button>
+                        {auth.role === 'admin' && <button onClick={()=>remove(it.id)} className="text-sm text-red-600">Delete</button>}
                         {it.status==='current' && <button onClick={()=>markComplete(it.id)} className="text-sm text-indigo-600">Mark Completed</button>}
                       </div>
                     </div>
