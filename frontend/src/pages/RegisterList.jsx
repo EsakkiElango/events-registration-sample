@@ -9,7 +9,6 @@ import { getAuth } from '../auth';
 
 export default function RegisterList(){
   const auth = getAuth();
-  console.log('AU',auth)
   const [items, setItems] = useState([]);
   useEffect(()=>{ load(); },[]);
   const load = ()=> API('/api/events').then(setItems).catch(console.error);
