@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState }
+ from 'react';
+ import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 import API from '../api';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Link } from 'react-router-dom';
@@ -17,8 +20,36 @@ export default function RegisterList(){
   };
   const remove = async (id) => { await API('/api/events/'+id, { method: 'DELETE' }); load(); };
   const markComplete = async (id) => { await API('/api/events/'+id+'/complete', { method: 'POST' }); load(); };
+  const exportToExcel = () => {
+    // 1. Prepare the data (Combining current and next events into one list)
+    // const allEvents = [];
+    // if (data.current) allEvents.push({ Status: 'Current', ...data.current });
+    // data.next.forEach(event => allEvents.push({ Status: 'Upcoming', ...event }));
+
+    // 2. Create a worksheet from the JSON data
+    const worksheet = XLSX.utils.json_to_sheet(items);
+    
+    // 3. Create a workbook and add the worksheet
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Events");
+
+    // 4. Generate the Excel file buffer
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    
+    // 5. Save the file using file-saver
+    const finalData = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    saveAs(finalData, `Events_List_2025.xlsx`);
+  };
   return (
     <div>
+      <div style={{ textAlign: 'right', marginBottom: '10px' }}>
+        <button 
+          onClick={exportToExcel}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 font-bold"
+        >
+          Export to Excel 📊
+        </button>
+      </div>
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold">Registers</h2>
         <Link to="/registers/new" className="bg-green-600 text-white px-3 py-1 rounded">New Register</Link>

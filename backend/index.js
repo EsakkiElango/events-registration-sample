@@ -67,19 +67,19 @@ app.get('/api/events', auth, async (req,res)=>{
 });
 
 app.post('/api/events', auth, async (req,res)=>{
-  const { tokenNo, title, eventDetails, mobileNo, startTime, endTime } = req.body;
+  const { tokenNo, title, eventDetails, mobileNo, organiser } = req.body;
   const row = await getAsync('SELECT MAX(orderIndex) as maxI FROM events');
   const next = (row && row.maxI) ? row.maxI + 1 : 1;
-  await runAsync('INSERT INTO events(tokenNo,title, eventDetails,mobileNo, startTime, endTime, status, orderIndex) VALUES(?,?,?,?,?,?,?,?)',
-    [tokenNo,title, eventDetails, mobileNo,startTime, endTime, 'upcoming', next]);
+  await runAsync('INSERT INTO events(tokenNo,title, eventDetails,mobileNo, organiser, status, orderIndex) VALUES(?,?,?,?,?,?,?)',
+    [tokenNo,title, eventDetails, mobileNo,organiser, 'upcoming', next]);
   const inserted = await getAsync('SELECT * FROM events WHERE id = last_insert_rowid()');
   res.json(inserted);
 });
 
 app.put('/api/events/:id', auth, async (req,res)=>{
   const id = req.params.id;
-  const { tokenNo,title, eventDetails, mobileNo,status, startTime, endTime } = req.body;
-  await runAsync('UPDATE events SET tokenNo=?, title=?, eventDetails=?, mobileNo=?, startTime=?, endTime=?, status=? WHERE id=?', [tokenNo,title, eventDetails, mobileNo,startTime, endTime, status, id]);
+  const { tokenNo,title, eventDetails, mobileNo,status, organiser } = req.body;
+  await runAsync('UPDATE events SET tokenNo=?, title=?, eventDetails=?, mobileNo=?, organiser=?, status=? WHERE id=?', [tokenNo,title, eventDetails, mobileNo,organiser, status, id]);
   const updated = await getAsync('SELECT * FROM events WHERE id=?', [id]);
   res.json(updated);
 });

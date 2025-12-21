@@ -3,7 +3,7 @@ import API from '../api';
 import { useNavigate, useParams } from 'react-router-dom';
 export default function RegistrationForm(){
   const { id } = useParams();
-  const [form, setForm] = useState({ tokenNo: 0, title:'', eventDetails:'',mobileNo: 0, status: 'upcoming' });
+  const [form, setForm] = useState({ tokenNo: 0, title:'', eventDetails:'',mobileNo: 0, status: 'upcoming', organiser: '' });
   const nav = useNavigate();
   useEffect(()=>{
     if(id) API('/api/events').then(list=>{ const e = list.find(x=>String(x.id)===String(id)); if(e) setForm(e); });
@@ -22,6 +22,7 @@ export default function RegistrationForm(){
         <div><label className="block text-sm">Name<input required value={form.title} onChange={e=>setForm({...form, title:e.target.value})} className="w-full border p-2 rounded" /></label></div>
         <div><label className="block text-sm">Status<input required value={form.status} onChange={e=>setForm({...form, status:e.target.value})} className="w-full border p-2 rounded" /></label></div>
         <div><label className="block text-sm">Event Details<textarea required value={form.eventDetails} onChange={e=>setForm({...form, eventDetails:e.target.value})} className="w-full border p-2 rounded" /></label></div>
+        <div><label className="block text-sm">Asaan Name<textarea required value={form.organiser} onChange={e=>setForm({...form, organiser:e.target.value})} className="w-full border p-2 rounded" /></label></div>
         <div><label className="block text-sm">Mobile No<textarea required value={form.mobileNo} onChange={e=>setForm({...form, mobileNo:e.target.value})} className="w-full border p-2 rounded" /></label></div>
         {/* <div className="grid grid-cols-2 gap-2">
           <input placeholder="Start ISO datetime" value={form.startTime} onChange={e=>setForm({...form, startTime:e.target.value})} className="border p-2 rounded" />

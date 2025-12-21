@@ -4,8 +4,7 @@ CREATE TABLE IF NOT EXISTS events (
   title TEXT NOT NULL,
   eventDetails TEXT,
   mobileNo INTEGER,
-  startTime TEXT,
-  endTime TEXT,
+  organiser TEXT,
   status TEXT NOT NULL DEFAULT 'upcoming',
   orderIndex INTEGER NOT NULL DEFAULT 0,
   createdAt TEXT NOT NULL DEFAULT (datetime('now','localtime'))
