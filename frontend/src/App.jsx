@@ -9,7 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 export default function App(){
 
 const [bgUrl, setBgUrl] = React.useState('');
-  const googleImageUrl = "https://drive.google.com/drive-viewer/AKGpihahl_S4fZOGl_iTFNk4Cach8rolf1imBXtQey2cHiI67NosFhN4GY-ePdFZB__XLV21BkD6I9Lp6cMl6mhnmiW_mrmY9hqx5Q=w1920-h1080-rw-v1?auditContext=forDisplay";
+  const googleImageUrl = "https://drive.google.com/drive-viewer/AKGpihaIU3cqkRS34pwEqXB_6yQ9UdZXD3tvjRNKwWhEZlbUgoyat2oWbRz-S00YvCl9GTE2AFbZrNqEiaugmmLt2mZfEX5LuznDUw=w1920-h1080-rw-v1?auditContext=forDisplay";
 
   React.useEffect(() => {
     // Fetch the image to bypass NotSameSite/CORP issues
