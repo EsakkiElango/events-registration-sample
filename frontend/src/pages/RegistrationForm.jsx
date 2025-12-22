@@ -3,7 +3,7 @@ import API from '../api';
 import { useNavigate, useParams } from 'react-router-dom';
 export default function RegistrationForm(){
   const { id } = useParams();
-  const [form, setForm] = useState({ tokenNo: 0, title:'', eventDetails:'',mobileNo: 0, status: 'upcoming', organiser: '' });
+  const [form, setForm] = useState({ tokenNo: null, title:'', eventDetails:'',mobileNo: null, status: 'upcoming', organiser: '' });
   const nav = useNavigate();
   useEffect(()=>{
     if(id) API('/api/events').then(list=>{ const e = list.find(x=>String(x.id)===String(id)); if(e) setForm(e); });
@@ -20,7 +20,20 @@ export default function RegistrationForm(){
       <form onSubmit={submit} className="bg-white p-4 rounded shadow space-y-3">
         <div><label className="block text-sm">Token No<input required value={form.tokenNo} onChange={e=>setForm({...form, tokenNo:e.target.value})} className="w-full border p-2 rounded" /></label></div>
         <div><label className="block text-sm">Name<input required value={form.title} onChange={e=>setForm({...form, title:e.target.value})} className="w-full border p-2 rounded" /></label></div>
-        <div><label className="block text-sm">Status<input required value={form.status} onChange={e=>setForm({...form, status:e.target.value})} className="w-full border p-2 rounded" /></label></div>
+        <div>
+        <label className="block text-sm font-medium mb-1">Status</label>
+        <select 
+          required 
+          value={form.status} 
+          onChange={e => setForm({...form, status: e.target.value})} 
+          className="w-full border p-2 rounded bg-white"
+        >
+          <option value="" disabled>Select Status</option>
+          <option value="current">Current</option>
+          <option value="upcoming">Upcoming</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
         <div><label className="block text-sm">Event Details<textarea required value={form.eventDetails} onChange={e=>setForm({...form, eventDetails:e.target.value})} className="w-full border p-2 rounded" /></label></div>
         <div><label className="block text-sm">Asaan Name<textarea required value={form.organiser} onChange={e=>setForm({...form, organiser:e.target.value})} className="w-full border p-2 rounded" /></label></div>
         <div><label className="block text-sm">Mobile No<textarea required value={form.mobileNo} onChange={e=>setForm({...form, mobileNo:e.target.value})} className="w-full border p-2 rounded" /></label></div>

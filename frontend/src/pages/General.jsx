@@ -2,13 +2,28 @@ import React, { useEffect, useState } from 'react';
 import API from '../api';
 export default function General(){
   const [data, setData] = useState({ current: null, next: [] });
-  useEffect(()=>{ API('/api/events/current-next').then((res) => {
-    // Ensure data.next is always an array, even if the API returns a single object
-    setData({
-      current: res.current,
-      next: Array.isArray(res.next) ? res.next : [res.next].filter(Boolean)
-    });
-  }).catch(console.error); },[]);
+  useEffect(() => {
+    let timerId;
+  
+    const poll = async () => {
+      try {
+        const res = await API('/api/events/current-next');
+        setData({
+          current: res.current,
+          next: Array.isArray(res.next) ? res.next : [res.next].filter(Boolean)
+        });
+      } catch (err) {
+        console.error(err);
+      } finally {
+        // Only schedule the next call AFTER the current one finishes
+        timerId = setTimeout(poll, 4000);
+      }
+    };
+  
+    poll();
+  
+    return () => clearTimeout(timerId); // Cleanup
+  }, []);// Empty dependency array means this only sets up once
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-4" style={{ color: 'yellow', textAlign: 'center', WebkitTextStroke: '1px red', 
