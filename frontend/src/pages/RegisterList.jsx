@@ -50,7 +50,7 @@ export default function RegisterList(){
       <div className="flex justify-between items-end mb-4">
         {/* New Filter Dropdown */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Filter by Status</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1 text-white">Filter by Status</label>
           <select 
             value={filter} 
             onChange={(e) => setFilter(e.target.value)}
@@ -74,7 +74,7 @@ export default function RegisterList(){
         </div>
       </div>
 
-      <h2 className="text-2xl font-semibold mb-4">Registers</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-white">Registers</h2>
 
       <DragDropContext onDragEnd={onDragEnd}>
         {/* Disable dropping if list is filtered to prevent index bugs */}
@@ -93,7 +93,7 @@ export default function RegisterList(){
                          className={`bg-white p-3 rounded shadow flex justify-between ${filter !== 'all' ? 'border-l-4 border-blue-400' : ''}`}>
                       <div>
                         <h4 className="font-semibold">
-                          {it.title} / {it.eventDetails} 
+                          {it.tokenNo} / {it.title} / {it.eventDetails} 
                           <span className="ml-2 text-xs uppercase px-2 py-1 bg-gray-100 rounded text-gray-600">
                             {it.status}
                           </span>

@@ -16,7 +16,7 @@ export default function General(){
         console.error(err);
       } finally {
         // Only schedule the next call AFTER the current one finishes
-        timerId = setTimeout(poll, 4000);
+        timerId = setTimeout(poll, 3000);
       }
     };
   
@@ -33,8 +33,15 @@ export default function General(){
           <h2 className="font-bold" style={{ fontSize: '25px', textAlign: 'left' }}>Current Event</h2>
           {data.current ? (
             <>
-              <h4 style={{ fontSize: '3.125rem', 
-                marginTop: '-10px', fontFamily: 'poppins', fontWeight: 700 }}>{data.current.tokenNo} / {data.current.title} / {data.current.eventDetails}</h4>
+              <h4 
+              class="text-4xl md:text-[3.125rem] p-1" 
+              style={{ 
+                // fontSize: '3.125rem', 
+                marginTop: '-10px', 
+                fontFamily: 'poppins', 
+                lineHeight: 1,
+                fontWeight: 700 }}
+                >{data.current.tokenNo} / {data.current.title} / {data.current.eventDetails}</h4>
             </>
           ) : <p>No current event</p>}
         </div>
@@ -52,13 +59,19 @@ export default function General(){
               <h3 className="font-semibold" style={{ fontSize: '25px', textAlign: 'left' }}>
                 {index === 0 ? "Next Event" : `Upcoming Event`}
               </h3>
-              <h4 style={{ fontSize: '3.125rem', marginTop: '-10px', fontFamily: 'poppins', fontWeight: 700 }}>
+              <h4 class="text-4xl md:text-[3rem] p-1" 
+              style={{ 
+                // fontSize: '3.125rem', 
+                marginTop: '-10px', 
+                fontFamily: 'poppins', 
+                lineHeight: 1,
+                fontWeight: 700 }}>
                 {event.tokenNo} / {event.title} / {event.eventDetails}
               </h4>
             </div>
           ))
         ) : (
-          <div className="px-4 rounded shadow" style={{ backgroundColor: '#FFFF5C' }}>
+          <div className="p-4 rounded shadow" style={{ backgroundColor: '#FFFF5C' }}>
             <p>No upcoming events</p>
           </div>
         )}

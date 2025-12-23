@@ -34,7 +34,22 @@ export default function RegistrationForm(){
           <option value="completed">Completed</option>
         </select>
       </div>
-        <div><label className="block text-sm">Event Details<textarea required value={form.eventDetails} onChange={e=>setForm({...form, eventDetails:e.target.value})} className="w-full border p-2 rounded" /></label></div>
+        {/* <div><label className="block text-sm">Event Details<textarea required value={form.eventDetails} onChange={e=>setForm({...form, eventDetails:e.target.value})} className="w-full border p-2 rounded" /></label></div> */}
+        <div>
+        <label className="block text-sm font-medium mb-1">Event Details</label>
+        <select 
+          required 
+          value={form.eventDetails} 
+          onChange={e => setForm({...form, eventDetails: e.target.value})} 
+          className="w-full border p-2 rounded bg-white"
+        >
+          <option value="" disabled>Select Event Details</option>
+          <option value="KALIYAL">Kaliyal</option>
+          <option value="KOLATTAM">Kolattam</option>
+          <option value="BHARATHANATYAM">Bharatanatyam</option>
+          <option value="LORRY BHAVANI">Lorry Bhavani</option>
+        </select>
+      </div>
         <div><label className="block text-sm">Asaan Name<textarea required value={form.organiser} onChange={e=>setForm({...form, organiser:e.target.value})} className="w-full border p-2 rounded" /></label></div>
         <div><label className="block text-sm">Mobile No<textarea required value={form.mobileNo} onChange={e=>setForm({...form, mobileNo:e.target.value})} className="w-full border p-2 rounded" /></label></div>
         {/* <div className="grid grid-cols-2 gap-2">

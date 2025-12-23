@@ -6,7 +6,8 @@ export default function Navbar(){
   const auth = getAuth();
   const handleLogout = () => { logout(); nav('/login'); };
   return (
-    <nav className="bg-white shadow p-4">
+    <div className="group p-4">
+    <nav className="hidden group-hover:block bg-white shadow p-4">
       <div className="max-w-5xl mx-auto flex justify-between items-center">
         <div className="space-x-4">
           <Link to="/" className="font-semibold">General</Link>
@@ -24,5 +25,6 @@ export default function Navbar(){
         </div>
       </div>
     </nav>
+    </div>
   );
 }
